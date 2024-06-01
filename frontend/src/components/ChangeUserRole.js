@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ROLE from '../common/role'
 import { IoCloseSharp } from "react-icons/io5";
 import { toast } from 'react-toastify';
+import SummaryApi from '../common';
 
 const ChangeUserRole = ({
     name,
@@ -19,8 +20,8 @@ const ChangeUserRole = ({
     }
 
     const updateUserRole = async() =>{
-        const fetchResponse = await fetch("http://localhost:8080/api/update-user",{
-            method: "post",
+        const fetchResponse = await fetch(SummaryApi.updateUser.url,{
+            method: SummaryApi.updateUser.method,
             credentials: "include",
             headers: {
                 "content-type": "application/json",

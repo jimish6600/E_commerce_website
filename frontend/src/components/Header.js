@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
+import SummaryApi from '../common';
 
 
 const Header = () => {
@@ -18,8 +19,8 @@ const Header = () => {
     // console.log("user header" , user)
 
     const handleLogout = async() =>{
-        const fetchData = await fetch("http://localhost:8080/api/userLogout",{
-            method : "get",
+        const fetchData = await fetch(SummaryApi.userLogout.url,{
+            method : SummaryApi.userLogout.method,
             credentials : 'include'
         })
 

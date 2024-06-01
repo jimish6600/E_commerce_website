@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { MdOutlineEdit } from "react-icons/md";
 import ChangeUserRole from '../components/ChangeUserRole';
+import SummaryApi from '../common';
 
 const AllUsers = () => {
     const [allUsers,setAllUsers] = useState([])
@@ -14,8 +15,8 @@ const AllUsers = () => {
     })
 
     const fetchAllUsers = async() =>{
-        const fetchData = await fetch("http://localhost:8080/api/all-users",{
-            method : "get",
+        const fetchData = await fetch(SummaryApi.allUsers.url,{
+            method : SummaryApi.allUsers.method,
             credentials : 'include'
         })
         
