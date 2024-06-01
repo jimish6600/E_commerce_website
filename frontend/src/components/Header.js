@@ -1,12 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from './Logo';
 import { CiSearch } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { setUserDetails } from '../store/userSlice';
+import ROLE from '../common/role';
 
 
 const Header = () => {
+    const user = useSelector(state => state.user?.user)
+    const dispatch = useDispatch()
+    const [manuDisplay , setManuDisplay] = useState(false)
+
+    // console.log("user header" , user)
+
+    const handleLogout = async() =>{
+        const fetchData = await fetch("http://localhost:8080/api/userLogout",{
+            method : "get",
+            credentials : 'include'
+        })
+
+        const data = await fetchData.json()
+
+        if(data.success){
+            toast.success(data.message)
+            dispatch(setUserDetails(null))
+        }else{
+            toast.error(data.message)
+        }
+    }
   return (
     <header className='h-16 shadow-md bg-white'>
         <div className='h-full container mx-auto flex items-center px-4 justify-between '>
@@ -24,8 +49,37 @@ const Header = () => {
             </div>
 
             <div className='flex items-center gap-3'>
-                <div className='text-3xl cursor-pointer'>
-                   <FaRegUserCircle/> 
+                
+                <div className='relative flex justify-center'>
+                    {
+                        user?._id && (
+                            <div className='text-3xl cursor-pointer' onClick={()=>setManuDisplay(preve => !preve)}>
+                        {
+                            user?.profilePic ? (
+                                <img src = {user.profilePic} className='w-10 h-10 rounded-full alt={user.name}'/>
+                            ) : (
+                                <FaRegUserCircle/> 
+                            )
+                        }
+                    </div>
+
+                    )
+                    }
+                    
+                    {
+                        manuDisplay && (
+                            
+                                    user?.role === ROLE.ADMIN && (
+                                        <div className='absolute bg-white bottom-0 top-11 h-fit p-2 shadow-lg rounded md:block hidden'>
+                                        <nav>
+                                            <Link to = {"/admin-panel/all-users"} className='whitespace-nowrap hover:bg-slate-100 p-1.5' onClick={()=>setManuDisplay(preve => !preve)}> Admin Panel</Link>
+                                        </nav>
+                                        </div>
+                                    )
+                                
+                        )
+                    }
+                    
                 </div>
 
                 <div className='text-2xl cursor-pointer relative'>
@@ -36,11 +90,19 @@ const Header = () => {
                 </div>
 
                 <div>
-                    <Link to={'login'}>
-                    <button className='ml-3 px-2 py-1 rounded-full bg-red-600'> 
-                        Login
-                    </button>
-                    </Link>
+                    {
+                        user?._id ? (
+                            <button onClick = {handleLogout} className='ml-3 px-2 py-1 rounded-full bg-red-600'> 
+                                Logout
+                            </button>
+                        ) : (
+                            <Link to={'login'}>
+                            <button className='ml-3 px-2 py-1 rounded-full bg-red-600'> 
+                                Login
+                            </button>
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
         </div>
