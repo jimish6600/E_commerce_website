@@ -15,7 +15,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
-  const {fetchUserDetails} = useContext(Context);
+  const {fetchUserDetails ,fetchUserAddToCart} = useContext(Context);
 
 
   const handleOnChange = (e) => {
@@ -36,7 +36,7 @@ const Login = () => {
       method: SummaryApi.signIn.method,
       credentials: "include",
       headers: {
-        "content-type": "application/json",
+        "content-type": "application/json"
       },
       body: JSON.stringify(data),
     });
@@ -46,7 +46,10 @@ const Login = () => {
     if (dataApi.success) {
       toast.success(dataApi.message);
       navigate("/");
+      localStorage.setItem('authToken', dataApi.data);
+      // console.log("token",dataApi.data)
       fetchUserDetails()
+      fetchUserAddToCart()
     } else {
       toast.error(dataApi.message);
     }

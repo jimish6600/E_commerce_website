@@ -14,8 +14,6 @@ async function updateUser(req,res){
 
         const user = await userModel.findById(sessionUser)
 
-        console.log(userId)
-
         const updateUserDetails = await userModel.findByIdAndUpdate(userId,payload)
 
         res.json({

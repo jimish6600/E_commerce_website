@@ -1,22 +1,28 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Logo from './Logo';
 import { CiSearch } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
 import SummaryApi from '../common';
+import Context from '../context';
+import logo from '../assest/logo.png'
 
 
 const Header = () => {
     const user = useSelector(state => state.user?.user)
     const dispatch = useDispatch()
     const [manuDisplay , setManuDisplay] = useState(false)
-
-    // console.log("user header" , user)
+    const context = useContext(Context)
+    const navigate = useNavigate()
+    const searchInput = useLocation()
+    const URLsearch = new URLSearchParams(searchInput?.search)
+    const searchQuery = URLsearch.getAll("q")
+    const [search,setSearch] = useState(searchQuery)
 
     const handleLogout = async() =>{
         const fetchData = await fetch(SummaryApi.userLogout.url,{
@@ -33,17 +39,28 @@ const Header = () => {
             toast.error(data.message)
         }
     }
+
+    const handleSearchbar = (e) =>{
+        const {value} = e.target
+        setSearch(value)
+        if(value){
+            navigate(`/search-product?q=${value}`)
+        }else{
+            navigate(`/search-product`)
+        }
+    }
+
   return (
-    <header className='h-16 shadow-md bg-white'>
+    <header className='h-16 shadow-md bg-white fixed w-full z-40'>
         <div className='h-full container mx-auto flex items-center px-4 justify-between '>
             <div className=''>
                 <Link to={"/"}> 
-                    <Logo w={100} h ={50}/>
+                    <img width={100} height ={50} src={logo}/>
                 </Link>
             </div>
 
             <div className='hidden lg:flex items-center w-full justify-center max-w-sm border rounded-full focus-within:shadow pl-2'>
-                <input type="text" placeholder='search product here....' className='w-full outline-none'/>
+                <input type="text" placeholder='search product here....' className='w-full outline-none' onChange={handleSearchbar} value={search}/>
                 <div className='text-lg min-w-[45px] bg-red-600 flex items-center justify-center rounded-r-full h-8'>
                     <CiSearch/>
                 </div>
@@ -83,12 +100,19 @@ const Header = () => {
                     
                 </div>
 
-                <div className='text-2xl cursor-pointer relative'>
-                    <span><FaShoppingCart/></span>
-                    <div className='bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center absolute -top-2 -right-3'>
-                        <p className='text-sm'>0</p>
-                    </div>
-                </div>
+                
+                    {
+                        user?._id  && (
+                            <Link  to= {"cart"} className='text-2xl cursor-pointer relative'>
+                                <span><FaShoppingCart/></span>
+                                <div className='bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center absolute -top-2 -right-3'>
+                                    <p className='text-sm'>{context?.addToCartProductCount}</p>
+                                </div>
+                            </Link>
+                        )
+                    }
+                    
+                
 
                 <div>
                     {
