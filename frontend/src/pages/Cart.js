@@ -124,7 +124,7 @@ const Cart = () => {
                             return(
                                 <div key = {index+"ADD TO CART"} className='w-full bg-white h-32 my-2 border border-slate-400 grid grid-cols-[120px,1fr]'>
                                     <div className='w-32 h-32'>
-                                        <img src={product?.productId.productImage[0]} className='w-full h-full object-scale-down mix-blend-multiply bg-slate-200'/>
+                                        <img src={product?.productId.productImage[0]} className='w-full h-full object-scale-down mix-blend-multiply bg-slate-200 mix-blend-multiply'/>
                                     </div>
 
                                     <div className='px-4 py-2 relative'>
