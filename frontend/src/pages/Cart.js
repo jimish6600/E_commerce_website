@@ -15,8 +15,9 @@ const Cart = () => {
         const response = await fetch(SummaryApi.addToCartProductView.url,{
             method: SummaryApi.addToCartProductView.method,
             credentials : 'include',
-            header : {
-                "content-type" : "application/json"
+            headers : {
+                "content-type" : "application/json",
+                "token" : localStorage.getItem('authToken')
             },
         })
         setLoading(false)
@@ -25,6 +26,7 @@ const Cart = () => {
         if(responseData.success){
             setData(responseData.data)
         }
+        console.log("kuch nahi hai",responseData.data)
     }
 
     useEffect(()=>{
@@ -36,7 +38,8 @@ const Cart = () => {
             method : SummaryApi.updateCartProduct.method,
             credentials : 'include',
             headers : {
-                "content-type" : "application/json"
+                "content-type" : "application/json",
+                "token" : localStorage.getItem('authToken')
             },
             body : JSON.stringify({
                 _id : id,
@@ -57,7 +60,8 @@ const Cart = () => {
             method : SummaryApi.updateCartProduct.method,
             credentials : 'include',
             headers : {
-                "content-type" : "application/json"
+                "content-type" : "application/json",
+                "token" : localStorage.getItem('authToken')
             },
             body : JSON.stringify({
                 _id : id,
@@ -77,7 +81,8 @@ const Cart = () => {
             method : SummaryApi.deleteCartProduct.method,
             credentials : 'include',
             headers : {
-                "content-type" : "application/json"
+                "content-type" : "application/json",
+                "token" : localStorage.getItem('authToken')
             },
             body : JSON.stringify({
                 _id : id

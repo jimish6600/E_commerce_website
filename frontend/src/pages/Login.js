@@ -36,7 +36,8 @@ const Login = () => {
       method: SummaryApi.signIn.method,
       credentials: "include",
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "token" : localStorage.getItem('authToken')
       },
       body: JSON.stringify(data),
     });
@@ -47,7 +48,6 @@ const Login = () => {
       toast.success(dataApi.message);
       navigate("/");
       localStorage.setItem('authToken', dataApi.data);
-      // console.log("token",dataApi.data)
       fetchUserDetails()
       fetchUserAddToCart()
     } else {
@@ -56,8 +56,8 @@ const Login = () => {
   };
 
   return (
-    <section id="login">
-      <div className="mx=auto container p-4">
+    <section id="login" className="flex items-center justify-center">
+      <div className="mx=auto container p-4 flex items-center justify-center">
         <div className="bg-white p-4 w-full max-w-md mx-auto">
           <div className="w-20 h-20 mx-auto">
             <img

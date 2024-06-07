@@ -19,6 +19,9 @@ function App() {
     const dataResponse = await fetch(SummaryApi.userDetails.url, {
       method: SummaryApi.userDetails.method,
       credentials: "include",
+      headers : {
+        "token" : localStorage.getItem('authToken')
+      }
     });
 
     const dataApi = await dataResponse.json();
@@ -27,13 +30,15 @@ function App() {
       dispatch(setUserDetails(dataApi.data))
     }
 
-    console.log("data-user", dataApi);
   }
 
   const fetchUserAddToCart = async() =>{
     const dataResponse = await fetch(SummaryApi.addToCartProductCount.url,{
       method : SummaryApi.addToCartProductCount.method,
-      credentials : 'include'
+      credentials : 'include',
+      headers : {
+        "token" : localStorage.getItem('authToken')
+      }
     })
 
     const dataApi = await dataResponse.json()
@@ -59,7 +64,7 @@ function App() {
           position="top-center"
         />
         <Header />
-        <main className="min-h-[calc(100vh-120px)] pt-16">
+        <main className="min-h-[calc(100vh-57px)] pt-16">
           <Outlet />
         </main>
         <Footer />

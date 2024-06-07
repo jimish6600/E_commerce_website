@@ -5,7 +5,8 @@ const fetchCategoryWiseProduct = async(category) =>{
     const response = await fetch(SummaryApi.categoryWiseProduct.url,{
         method : SummaryApi.categoryWiseProduct.method,
         headers : {
-            "content-type" : "application/json"
+            "content-type" : "application/json",
+            "token" : localStorage.getItem('authToken')
         },
         body : JSON.stringify({
             category : category

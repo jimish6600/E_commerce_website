@@ -23,9 +23,7 @@ const HorizontalCardProduct = ({ category, heading }) => {
   const fetchData = async () => {
     setLoading(true);
     const categoryProduct = await fetchCategoryWiseProduct(category);
-    console.log(category);
     setData(categoryProduct.data);
-    console.log("categoryProduct", categoryProduct);
     setLoading(false);
   };
   useEffect(() => {
@@ -90,11 +88,11 @@ const HorizontalCardProduct = ({ category, heading }) => {
             data.map((product) => {
               return (
                 <Link to={"product/"+product._id} className="w-full min-w-[280px] md:min-w-[320px] max-w-[280px] md:max-w-[320px] h-36 bg-white rounded-sm shadow flex">
-                  <div className="bg-slate-200 h-full p-4 mix-w-[120px] md:min-w-[145px] ">
+                  <div className="bg-slate-200 h-full p-4 mix-w-[120px] md:min-w-[145px] flex justify-center items-center">
                     <img
                       src={product.productImage[0]}
                       alt=""
-                      className="object-scale-down h-full hover:scale-110"
+                      className="object-scale-down h-full hover:scale-110 mix-blend-multiply"
                     />
                   </div>
                   <div className="p-3">

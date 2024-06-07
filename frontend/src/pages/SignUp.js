@@ -51,7 +51,8 @@ const SignUp = () => {
             const dataResponse = await fetch(SummaryApi.signUp.url,{
                 method : SummaryApi.signUp.url,
                 headers : {
-                    "Content-Type" : "application/json"
+                    "Content-Type" : "application/json",
+                    "token" : localStorage.getItem('authToken')
                 },
                 body : JSON.stringify(data)
             })
@@ -63,14 +64,13 @@ const SignUp = () => {
             }else{
                 toast.error(dataApi.message)
             }
-            // console.log(dataApi)     
         }else{
             toast.error("Please check password and confirm password")
         }
     }
 
   return (
-    <section id="Sing">
+    <section id="Sing" className="flex items-center justify-center">
         <div className='mx=auto container p-4'>
             <div className='bg-white p-4 w-full max-w-md mx-auto'>
                 <div className='w-20 h-20 mx-auto relative overflow-hidden rounded-full'>

@@ -4,7 +4,6 @@ import SummaryApi from '../common'
 import { IoIosStar } from "react-icons/io";
 import { IoIosStarHalf } from "react-icons/io";
 import displayINRCurrency from '../helpers/displayCurrency';
-import VerticalCardProduct from '../components/VerticalCardProduct';
 import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay';
 import addToCart from '../helpers/addToCart';
 import Context from "../context";
@@ -36,7 +35,8 @@ const ProductDetails = () => {
     const response = await fetch(SummaryApi.productDetails.url,{
       method : SummaryApi.productDetails.method,
       headers : {
-        "content-type" : "application/json"
+        "content-type" : "application/json",
+        "token" : localStorage.getItem('authToken')
       },
       body : JSON.stringify({
         productId : params?.id

@@ -19,7 +19,6 @@ const SearchProduct = () => {
         const response = await fetch(SummaryApi.searchProduct.url+query.search)
         const dataResponse = await response.json()
         setData(dataResponse.data)
-        // console.log("seerch",dataResponse)
         SetLoading(false)
     }
 

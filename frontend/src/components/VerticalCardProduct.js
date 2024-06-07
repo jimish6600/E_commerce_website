@@ -23,9 +23,7 @@ const VerticalCardProduct = ({ category, heading }) => {
   const fetchData = async () => {
     setLoading(true);
     const categoryProduct = await fetchCategoryWiseProduct(category);
-    console.log(category);
     setData(categoryProduct.data);
-    console.log("categoryProduct", categoryProduct);
     setLoading(false);
   };
   useEffect(() => {
@@ -91,7 +89,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                           <img
                             src={product.productImage[0]}
                             alt=""
-                            className="object-scale-down h-full hover:scale-110"
+                            className="object-scale-down h-full hover:scale-110 mix-blend-multiply"
                           />
                         </div>
                         <div className="p-3">

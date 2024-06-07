@@ -66,7 +66,8 @@ const UploadProduct = ({
       method : SummaryApi.uploadProduct.method,
       credentials : 'include',
       headers : {
-        "content-type" : "application/json"
+        "content-type" : "application/json",
+        "token" : localStorage.getItem('authToken')
       },
       body : JSON.stringify(data)
     })
@@ -77,7 +78,6 @@ const UploadProduct = ({
     }else{
       toast.error(responseData.message)
     }
-    console.log(responseData)
     onClose()
   }
 

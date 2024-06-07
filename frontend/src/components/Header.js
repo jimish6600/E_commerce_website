@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import Logo from './Logo';
 import { CiSearch } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
@@ -27,7 +26,10 @@ const Header = () => {
     const handleLogout = async() =>{
         const fetchData = await fetch(SummaryApi.userLogout.url,{
             method : SummaryApi.userLogout.method,
-            credentials : 'include'
+            credentials : 'include',
+            headers : {
+                "token" : localStorage.getItem('authToken')
+            }
         })
 
         const data = await fetchData.json()

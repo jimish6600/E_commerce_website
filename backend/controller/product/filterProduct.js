@@ -3,7 +3,6 @@ const productModel = require("../../models/productModel");
 const filterProductController = async(req,res) => {
     try{
       const categoryList = req.body?.category || []
-      console.log("jimish" , categoryList)
       const product = await productModel.find({
         category : {
           "$in" : categoryList

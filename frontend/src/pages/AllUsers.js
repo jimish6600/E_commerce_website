@@ -17,14 +17,16 @@ const AllUsers = () => {
     const fetchAllUsers = async() =>{
         const fetchData = await fetch(SummaryApi.allUsers.url,{
             method : SummaryApi.allUsers.method,
-            credentials : 'include'
+            credentials : 'include',
+            headers : {
+                "token" : localStorage.getItem('authToken')
+            }
         })
         
         const dataResponse = await fetchData.json()
         if(dataResponse.success){
             setAllUsers(dataResponse.data)
         }
-        // console.log("jimish" , allUsers,dataResponse.data)
         
     }
     useEffect(()=>{

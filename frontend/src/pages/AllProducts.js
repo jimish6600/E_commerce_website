@@ -13,7 +13,6 @@ const AllProducts = () => {
     const dataResponse = await response.json()
 
     setallProduct(dataResponse?.data || [])
-    // console.log("jimish")
   }
 
   useEffect(()=>{

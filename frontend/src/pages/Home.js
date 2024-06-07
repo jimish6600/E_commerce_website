@@ -10,8 +10,9 @@ const Home = () => {
       <CategoryLisy />
       <BannerProduct />
       <HorizontalCardProduct category={"airpodes"} heading={"Top's Airpodes"} />
-      <HorizontalCardProduct category={"airpodes"} heading={"Top's Airpodes"} />
-      <VerticalCardProduct category={"airpodes"} heading={"Top's Airpodes"} />
+      <HorizontalCardProduct category={"speakers"} heading={"Top's Speakers"} />
+      <VerticalCardProduct category={"televisions"} heading={"Top's Televisions"} />
+      <VerticalCardProduct category={"mobiles"} heading={"Top's Mobiles"} />
     </div>
   );
 };

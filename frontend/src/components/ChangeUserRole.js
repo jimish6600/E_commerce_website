@@ -24,7 +24,8 @@ const ChangeUserRole = ({
             method: SummaryApi.updateUser.method,
             credentials: "include",
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
+                "token" : localStorage.getItem('authToken')
             },
             data : `${localStorage.getItem('authToken')}`,
             body: JSON.stringify({
@@ -32,7 +33,7 @@ const ChangeUserRole = ({
                 role : userRole
             })
         })
-        console.log("jimish",localStorage.getItem('authToken'))
+        
         const responseData = await fetchResponse.json()
 
         if(responseData.success){

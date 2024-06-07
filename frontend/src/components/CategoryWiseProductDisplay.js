@@ -20,9 +20,7 @@ const CategoryWiseProductDisplay = ({ category, heading }) => {
   const fetchData = async () => {
     setLoading(true);
     const categoryProduct = await fetchCategoryWiseProduct(category);
-    console.log(category);
     setData(categoryProduct.data);
-    console.log("categoryProduct", categoryProduct);
     setLoading(false);
   };
   useEffect(() => {
