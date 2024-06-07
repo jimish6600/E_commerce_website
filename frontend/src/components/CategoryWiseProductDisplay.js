@@ -67,7 +67,7 @@ const CategoryWiseProductDisplay = ({ category, heading }) => {
                           <img
                             src={product.productImage[0]}
                             alt=""
-                            className=" bg-slate-200 object-scale-down h-full hover:scale-110 mix-blend-multiply"
+                            className="object-scale-down h-full hover:scale-110 mix-blend-multiply"
                           />
                         </div>
                         <div className="p-3">
