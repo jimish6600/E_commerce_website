@@ -1,3 +1,4 @@
+const takePermission = require("../../helpers/permission")
 const userModel = require("../../models/userModel")
 
 async function updateUser(req,res){
@@ -12,6 +13,9 @@ async function updateUser(req,res){
             ...(role && {role : role})
         }
 
+        if(!takePermission(sessionUser)){
+            throw new Error("You are not admin")
+        }
         const user = await userModel.findById(sessionUser)
 
         const updateUserDetails = await userModel.findByIdAndUpdate(userId,payload)

@@ -32,7 +32,7 @@ router.get("/all-users", authToken, allUsers);
 router.post("/update-user", authToken, updateUser);
 
 // //product
-router.post("/upload-product", uploadProductController);
+router.post("/upload-product",authToken, uploadProductController);
 router.get("/get-products", getProductController);
 router.post("/update-product", authToken, updateProductController);
 router.get("/get-categoryProduct", getCategoryProductOne);
