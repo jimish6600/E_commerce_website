@@ -24,21 +24,13 @@ const Header = () => {
     const [search,setSearch] = useState(searchQuery)
 
     const handleLogout = async() =>{
-        const fetchData = await fetch(SummaryApi.userLogout.url,{
-            method : SummaryApi.userLogout.method,
-            credentials : 'include',
-            headers : {
-                "token" : localStorage.getItem('authToken')
-            }
-        })
-
-        const data = await fetchData.json()
-
-        if(data.success){
-            toast.success(data.message)
+        localStorage.removeItem('authToken');
+    
+        if(!localStorage.getItem('authToken')){
+            toast.success("Logged out successfully")
             dispatch(setUserDetails(null))
         }else{
-            toast.error(data.message)
+            toast.error("Something is wrong")
         }
     }
 

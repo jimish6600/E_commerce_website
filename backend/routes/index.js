@@ -6,7 +6,6 @@ const unseSingUpController = require("../controller/user/userSignUp");
 const userSignInController = require("../controller/user/userSignin");
 const authToken = require("../middleware/authToken");
 const userDetailsController = require("../controller/user/userDetails");
-const userLogout = require("../controller/user/userLogout");
 const allUsers = require("../controller/user/allUsers");
 const updateUser = require("../controller/user/updateUser");
 const uploadProductController = require("../controller/product/uploadProduct");
@@ -27,7 +26,6 @@ router.post("/signup", unseSingUpController);
 router.post("/signin", userSignInController);
 
 router.get("/user-details", authToken, userDetailsController);
-router.get("/userLogout", userLogout);
 
 // //admin panel
 router.get("/all-users", authToken, allUsers);

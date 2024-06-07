@@ -5,8 +5,10 @@ const addToCartController = async(req,res) =>{
         const {productId} = req?.body
         const currentUser = req.userId
 
-        const isProductAvailable = await addToCartModel.findOne({productId})
-
+        if(!currentUser){
+            throw new Error("Please Login")
+        }
+        const isProductAvailable = await addToCartModel.findOne({productId, userID : currentUser})
         if(isProductAvailable){
             throw new Error("Already exits in Add to cart")
         }

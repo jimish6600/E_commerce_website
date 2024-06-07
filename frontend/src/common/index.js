@@ -13,10 +13,6 @@ const SummaryApi = {
     url: `${backendDomain}/api/update-user`,
     method: "post",
   },
-  userLogout : {
-    url: `${backendDomain}/api/userLogout`,
-    method: "get",
-  },
   userDetails : {
     url: `${backendDomain}/api/user-details`,
     method: "get",
