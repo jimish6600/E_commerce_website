@@ -123,15 +123,15 @@ const Cart = () => {
                         data.map((product,index)=>{
                             return(
                                 <div key = {index+"ADD TO CART"} className='w-full bg-white h-32 my-2 border border-slate-400 grid grid-cols-[120px,1fr]'>
-                                    <div className='w-32 h-32'>
-                                        <img src={product?.productId.productImage[0]} className='w-full h-full object-scale-down mix-blend-multiply bg-slate-200 mix-blend-multiply'/>
+                                    <div className='w-32 h-32 bg-slate-200'>
+                                        <img src={product?.productId.productImage[0]} className='w-full h-full object-scale-down mix-blend-multiply'/>
                                     </div>
 
                                     <div className='px-4 py-2 relative'>
                                         <div className='absolute right-2 text-red-600 rounded-full p-2 border-red-600 border hover:text-white hover:bg-red-600 cursor-pointer' onClick={() => deleteCartProduct(product?._id)}>
                                             <MdDeleteOutline />
                                         </div>
-                                        <h2 className='text-lg lg:text-xl text-ellipsis line-clamp-1'>{product?.productId.productName}</h2>
+                                        <h2 className='text-lg lg:text-xl text-ellipsis line-clamp-1 pr-6'>{product?.productId.productName}</h2>
                                         <p className='capitalize text-slate-500'>{product?.productId.category}</p>
                                         <div className='flex justify-between items-center'>
                                             <p className='text-red-600 font-medium text-lg'>{displayINRCurrency(product?.productId.sellingPrice)}</p>
