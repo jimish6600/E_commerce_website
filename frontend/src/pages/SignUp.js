@@ -3,9 +3,9 @@ import LoginIcon from '../assest/signin.gif'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
-import imageTobase64 from '../helpers/imageTobase64'
 import { toast } from 'react-toastify';
 import SummaryApi from '../common';
+import uploadImage from '../helpers/uploadImage';
 
 const SignUp = () => {
     const [pass, setpass] = useState(false);
@@ -34,12 +34,13 @@ const SignUp = () => {
     const handleUploadPic = async(e) =>{
         const file = e.target.files[0]
 
-        const imagePic = await imageTobase64(file)
+        const uploadImageCloudinary = await uploadImage(file)
+        console.log(uploadImageCloudinary)
 
         setData((preve)=>{
             return{
                 ...preve,
-                profilePic : imagePic
+                profilePic : uploadImageCloudinary.url
             }
         })
     }
@@ -49,7 +50,7 @@ const SignUp = () => {
 
         if(data.password === data.confirmPassword){
             const dataResponse = await fetch(SummaryApi.signUp.url,{
-                method : SummaryApi.signUp.url,
+                method : SummaryApi.signUp.method,
                 headers : {
                     "Content-Type" : "application/json",
                     "token" : localStorage.getItem('authToken')
